@@ -24,9 +24,12 @@ export const parseFile = async (file) => {
       const arrayBuffer = await file.arrayBuffer();
       const result = await mammoth.extractRawText({ arrayBuffer });
       return result.value;
+    } else if (file.type === 'text/plain') {
+      const text = await file.text();
+      return text;
     }
 
-    throw new Error('Unsupported file type. Please upload PDF or DOCX');
+    throw new Error('Unsupported file type. Please upload PDF, DOCX, or TXT');
   } catch (error) {
     console.error('File parsing error:', error);
     throw error;

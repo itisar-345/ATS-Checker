@@ -54,14 +54,51 @@
 
 ---
 
-## Project Overview
+## Overview
 
 ATS-Checker is an AI-powered resume analysis tool designed to help job seekers optimize their resumes for Applicant Tracking Systems (ATS). The system analyzes uploaded resumes, provides a compatibility score, and offers actionable improvement suggestions to increase the chances of passing ATS filters.
 
-The project consists of two main parts:
+## 🔍 Key Features
 
-- **Backend:** A Node.js Express API server that processes resume text, interacts with AI services, and returns analysis results.
-- **Frontend:** A React application that provides a user-friendly interface for uploading resumes, viewing analysis results, and managing analysis history.
+- **🚀 AI-Powered Resume Analysis**
+  - Upload your resume in `.docx`, `.pdf`, or plain text.
+  - Get an overall ATS compatibility score with category-wise breakdown (formatting, keywords, experience, etc.).
+
+- **🎯 Detailed ScoreCard**
+  - Visual and color-coded score representation.
+  - Category feedback including status (Excellent, Needs Work, Critical).
+
+- **💡 AI-Generated Improvement Suggestions**
+  - Grouped by category with titles, descriptions, rationale.
+  - Before vs After code-style display for clarity.
+  - Expandable sections for focused insights.
+
+- **📜 Resume History Management**
+  - Stores past resume analyses locally in your browser.
+  - Features include:
+    - Search
+    - Sort (by date, score, or name)
+    - Mark as Favorite ⭐
+    - Export suggestions as downloadable text reports
+    - Delete individual entries or clear all history
+
+- **📈 Analytics & Metrics**
+  - Shows average score, highest score, and total resume count in sidebar.
+
+- **🎨 Interactive & Responsive UI**
+  - Fully responsive layout with animated background.
+  - Tabbed interface (Upload / Analysis).
+  - Dynamic toast notifications with Sonner.
+
+- **🛡️ Secure & Private**
+  - Runs locally without storing data on servers.
+  - No third-party tracking or cloud data retention.
+
+- **⚡ Built with Modern Stack**
+  - React + Vite frontend  
+  - Express backend with Groq SDK for AI analysis  
+  - Uses Lucide, Sonner, Date-fns, and Dropzone for enhanced UX
+
 
 ---
 
