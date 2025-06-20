@@ -19,13 +19,10 @@
     <img src="https://img.shields.io/badge/dotenv-8DD6F9?style=flat&logo=envato&logoColor=black" />
   </a>
   <a href="https://www.npmjs.com/package/groq-sdk">
-    <img src="https://img.shields.io/badge/groq--sdk-FF6B00?style=flat&logo=data&logoColor=white" />
+    <img src="https://img.shields.io/badge/Groq--SDK-FF6B00?style=flat&logo=openai&logoColor=white" />
   </a>
   <a href="https://www.npmjs.com/package/mammoth">
     <img src="https://img.shields.io/badge/mammoth-5C2D91?style=flat&logo=python&logoColor=white" />
-  </a>
-  <a href="https://www.npmjs.com/package/@google/generative-ai">
-    <img src="https://img.shields.io/badge/@google/generative--ai-34A853?style=flat&logo=google&logoColor=white" />
   </a>
   <br>
   <!-- Frontend Badges -->
@@ -52,9 +49,6 @@
   </a>
   <a href="https://www.npmjs.com/package/date-fns">
     <img src="https://img.shields.io/badge/date--fns-007ACC?style=flat&logo=clockify&logoColor=white" />
-  </a>
-  <a href="https://www.npmjs.com/package/@google/generative-ai">
-    <img src="https://img.shields.io/badge/@google/generative--ai-34A853?style=flat&logo=google&logoColor=white" />
   </a>
 </p>
 
