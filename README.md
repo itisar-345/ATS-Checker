@@ -61,7 +61,7 @@ ATS-Checker is an AI-powered resume analysis tool designed to help job seekers o
 ## 🔍 Key Features
 
 - **🚀 AI-Powered Resume Analysis**
-  - Upload your resume in `.docx`, `.pdf`, or plain text.
+  - Upload your resume in `.docx`, `.pdf`, or `.txt`.
   - Get an overall ATS compatibility score with category-wise breakdown (formatting, keywords, experience, etc.).
 
 - **🎯 Detailed ScoreCard**
