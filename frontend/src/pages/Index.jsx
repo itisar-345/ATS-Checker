@@ -25,7 +25,7 @@ const Index = () => {
   const [currentAnalysisId, setCurrentAnalysisId] = useState(null);
   const [analysisHistory, setAnalysisHistory] = useState([]);
   const [uploadedFileName, setUploadedFileName] = useState('');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const history = getAnalysisHistory();
