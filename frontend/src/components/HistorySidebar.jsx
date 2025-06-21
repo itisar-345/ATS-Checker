@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FileText, Clock, TrendingUp, Trash2, Download, Star, Search, Filter, MoreHorizontal } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
@@ -14,7 +14,14 @@ const HistorySidebar = ({
   const [favorites, setFavorites] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
   
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const toggleSortDropdown = () => {
     setIsSortDropdownOpen((prev) => !prev);
   };
@@ -151,19 +158,20 @@ const HistorySidebar = ({
       backgroundColor: 'rgba(255,255,255,0.03)', 
       backdropFilter: 'blur(24px)',
       minHeight: '100vh',
+      width: '100%'
     }}>
       <div style={{
-        padding: '0.5rem 2rem', 
+        padding: windowWidth < 768 ? '0.5rem 1rem' : '0.5rem 2rem', 
         borderBottom: '1px solid rgba(229,231,235,0.3)'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-          <h2 style={{ fontSize: '1.125rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb' }}>
-            <Clock style={{ height: '1.25rem', width: '1.25rem', color: '#34d399' }} />
-            Analysis History
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem', alignItems: 'flex-start', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: windowWidth < 768 ? '1rem' : '1.125rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb', minWidth: 0, flex: 1 }}>
+            <Clock style={{ height: windowWidth < 768 ? '1rem' : '1.25rem', width: windowWidth < 768 ? '1rem' : '1.25rem', color: '#34d399', flexShrink: 0 }} />
+            <span style={{ wordBreak: 'break-word' }}>Analysis History</span>
           </h2>
 
           {history.length > 0 && (
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', flexShrink: 0 }}>
               <button
                 onClick={toggleDropdown}
                 style={{
@@ -178,7 +186,7 @@ const HistorySidebar = ({
                   justifyContent: 'center'
                 }}
               >
-                <MoreHorizontal size={24} style={{ marginTop: '1rem', color: '#34d399' }} />
+                <MoreHorizontal size={windowWidth < 768 ? 20 : 24} style={{ marginTop: '1rem', color: '#34d399' }} />
               </button>
 
               {isDropdownOpen && (
@@ -190,7 +198,8 @@ const HistorySidebar = ({
                   border: '1px solid rgba(229,231,235,0.3)',
                   borderRadius: '0.5rem',
                   padding: '0.25rem',
-                  zIndex: 10
+                  zIndex: 10,
+                  minWidth: '150px'
                 }}>
                   <div
                     onClick={onClearHistory}
@@ -199,10 +208,11 @@ const HistorySidebar = ({
                       display: 'flex',
                       alignItems: 'center',
                       padding: '0.5rem 0.75rem',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem'
                     }}
                   >
-                    <Trash2 size={32} style={{ marginRight: '0.5rem' }} />
+                    <Trash2 size={windowWidth < 768 ? 16 : 20} style={{ marginRight: '0.5rem' }} />
                     Clear All History
                   </div>
                 </div>
@@ -220,8 +230,8 @@ const HistorySidebar = ({
                   left: '0.75rem',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  height: '1rem',
-                  width: '1rem',
+                  height: windowWidth < 768 ? '0.875rem' : '1rem',
+                  width: windowWidth < 768 ? '0.875rem' : '1rem',
                   color: '#e5e7eb' 
                 }}
               />
@@ -235,9 +245,10 @@ const HistorySidebar = ({
                   backgroundColor: 'rgba(255, 255, 255, 0.05)', // bg-background/50
                   border: '1px solid rgba(229, 231, 235, 0.3)', // border-border
                   borderRadius: '0.375rem',
-                  width: '80%',
-                  height: '2.5rem',
-                  color: '#e5e7eb'
+                  width: '100%',
+                  height: windowWidth < 768 ? '2rem' : '2.5rem',
+                  color: '#e5e7eb',
+                  fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem'
                 }}
               />
             </div>
@@ -250,17 +261,17 @@ const HistorySidebar = ({
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '0.25rem 0.5rem',
+                    padding: windowWidth < 768 ? '0.25rem 0.375rem' : '0.25rem 0.5rem',
                     border: '1px solid rgba(229,231,235,0.3)',
                     backgroundColor: 'transparent',
                     borderRadius: '0.375rem',
-                    fontSize: '0.875rem',
+                    fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem',
                     width: '100%',
                     cursor: 'pointer',
                     color: '#e5e7eb'
                   }}
                 >
-                  <Filter style={{ height: '0.75rem', width: '0.75rem', marginRight: '0.25rem' }} />
+                  <Filter style={{ height: windowWidth < 768 ? '0.625rem' : '0.75rem', width: windowWidth < 768 ? '0.625rem' : '0.75rem', marginRight: '0.25rem' }} />
                   Sort: {sortBy === 'date' ? 'Date' : sortBy === 'score' ? 'Score' : 'Name'}
                 </button>
 
@@ -302,22 +313,22 @@ const HistorySidebar = ({
         )}
       </div>
 
-      <div style={{ padding: '0.5rem' }}>
+      <div style={{ padding: '0.5rem', overflowY: 'auto', flex: 1 }}>
         <div>
           {filteredAndSortedHistory.length === 0 ? (
             <div style={{ padding: '1rem', textAlign: 'center', color: '#9ca3af' }}>
-              <FileText style={{ height: '2rem', width: '2rem', margin: '0 auto 0.5rem', opacity: 0.5 }} />
-              <p style={{ fontSize: '0.875rem' }}>
+              <FileText style={{ height: windowWidth < 768 ? '1.5rem' : '2rem', width: windowWidth < 768 ? '1.5rem' : '2rem', margin: '0 auto 0.5rem', opacity: 0.5 }} />
+              <p style={{ fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem' }}>
                 {searchTerm ? 'No matching analyses' : 'No analyses yet'}
               </p>
             </div>
           ) : (
             filteredAndSortedHistory.map((item) => (
-              <div key={item.id}>
+              <div key={item.id} style={{ marginBottom: '0.5rem' }}>
                 <div
                   style={{
                     position: 'relative',
-                    padding: '0.75rem',
+                    padding: windowWidth < 768 ? '0.5rem' : '0.75rem',
                     borderRadius: '0.5rem',
                     border: '1px solid',
                     transition: 'all 0.2s ease',
@@ -343,22 +354,24 @@ const HistorySidebar = ({
                       backgroundColor: 'transparent',
                       display: 'block',
                       border: 'none',
+                      cursor: 'pointer'
                     }}
                   >
-                    <div style={{ display: 'flex', gap: '0.75rem', minWidth: 0, width: '100%' }}>
-                      <FileText style={{  marginTop: '0.5rem', flexShrink: 0, color: '#10b981' }} />
+                    <div style={{ display: 'flex', gap: windowWidth < 768 ? '0.5rem' : '0.75rem', minWidth: 0, width: '100%' }}>
+                      <FileText style={{ marginTop: '0.5rem', flexShrink: 0, color: '#10b981', width: windowWidth < 768 ? '16px' : '20px', height: windowWidth < 768 ? '16px' : '20px' }} />
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.1rem' }}>
-                          <p style={{ fontWeight: 500, fontSize: '0.875rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '0.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.1rem', alignItems: 'flex-start', gap: '0.5rem' }}>
+                          <p style={{ fontWeight: 500, fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1, minWidth: 0 }}>
                             {item.fileName}
                           </p>
                           <div
                             style={{
-                              fontSize: '0.75rem',
-                              padding: '0.75rem 0.5rem',
+                              fontSize: windowWidth < 768 ? '0.625rem' : '0.75rem',
+                              padding: windowWidth < 768 ? '0.375rem 0.375rem' : '0.75rem 0.5rem',
                               borderRadius: '9999px',
                               fontWeight: 'bold',
                               border: '1px solid',
+                              flexShrink: 0,
                               ...getScoreBadge(item.score.overallScore)
                             }}
                           >
@@ -367,7 +380,7 @@ const HistorySidebar = ({
                         </div>
                         <p
                           style={{
-                            fontSize: '0.75rem',
+                            fontSize: windowWidth < 768 ? '0.625rem' : '0.75rem',
                             color: 'rgb(225, 225, 225)',
                             whiteSpace: 'nowrap',
                             overflow: 'hidden',
@@ -377,8 +390,8 @@ const HistorySidebar = ({
                         >
                           {item.preview}
                         </p>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <p style={{ fontSize: '0.75rem', color: 'rgb(223, 223, 223)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+                          <p style={{ fontSize: windowWidth < 768 ? '0.625rem' : '0.75rem', color: 'rgb(223, 223, 223)' }}>
                             {formatDistanceToNow(new Date(item.timestamp), { addSuffix: true })}
                           </p>
                           <div
@@ -390,9 +403,9 @@ const HistorySidebar = ({
                                 e.stopPropagation();
                                 toggleFavorite(item.id);
                               }}
-                              style={{ height: '1.5rem', width: '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
+                              style={{ height: windowWidth < 768 ? '1.25rem' : '1.5rem', width: windowWidth < 768 ? '1.25rem' : '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
                             >
-                              <Star size={18}
+                              <Star size={windowWidth < 768 ? 14 : 18}
                                 style={{
                                   fill: favorites.includes(item.id) ? '#facc15' : 'none',
                                   color: favorites.includes(item.id) ? '#facc15' : '#e5e7eb'
@@ -404,9 +417,9 @@ const HistorySidebar = ({
                                 e.stopPropagation();
                                 exportAnalysis(item);
                               }}
-                              style={{ height: '1.5rem', width: '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
+                              style={{ height: windowWidth < 768 ? '1.25rem' : '1.5rem', width: windowWidth < 768 ? '1.25rem' : '1.5rem', background: 'none', border: 'none', cursor: 'pointer' }}
                             >
-                              <Download size={18} style={{ color: '#e5e7eb' }} />
+                              <Download size={windowWidth < 768 ? 14 : 18} style={{ color: '#e5e7eb' }} />
                             </button>
                             <button
                               onClick={(e) => {
@@ -414,15 +427,15 @@ const HistorySidebar = ({
                                 onDeleteAnalysis(item.id);
                               }}
                               style={{
-                                height: '1.5rem',
-                                width: '1.5rem',
+                                height: windowWidth < 768 ? '1.25rem' : '1.5rem',
+                                width: windowWidth < 768 ? '1.25rem' : '1.5rem',
                                 background: 'none',
                                 border: 'none',
                                 cursor: 'pointer',
                                 color: '#f87171'
                               }}
                             >
-                              <Trash2 size={18} />
+                              <Trash2 size={windowWidth < 768 ? 14 : 18} />
                             </button>
                           </div>
                         </div>
@@ -437,18 +450,18 @@ const HistorySidebar = ({
       </div>
 
       {history.length > 0 && (
-        <div style={{ position:'fixed', width: '100%', marginTop: '1rem', borderTop: '1px solid #ccc', padding: '0.5rem 1rem' }}>
-          <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb' }}>
-            <TrendingUp size={18} style={{color: '#10b981'}}/>
+        <div style={{ position: 'sticky', bottom: 0, width: '100%', marginTop: '1rem', borderTop: '1px solid #ccc', padding: windowWidth < 768 ? '0.5rem 0.75rem' : '0.5rem 1rem', backgroundColor: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(8px)' }}>
+          <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', marginBottom: '0.25rem' }}>
+            <TrendingUp size={windowWidth < 768 ? 14 : 18} style={{color: '#10b981'}}/>
             Average Score:{' '}
             <strong style={{ color: getScoreColor(averageScore) }}>{averageScore}%</strong>
           </p>
-          <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb' }}>
-            <Star size={18} style={{color: '#10b981'}} />
+          <p style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', marginBottom: '0.25rem' }}>
+            <Star size={windowWidth < 768 ? 14 : 18} style={{color: '#10b981'}} />
             Best Score:{' '}
             <strong style={{ color: getScoreColor(highestScore) }}>{highestScore}%</strong>
           </p>
-          <p style={{ padding: '0 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb'}}>Total Analyses: <strong>{history.length}</strong></p>
+          <p style={{ padding: windowWidth < 768 ? '0 0.75rem' : '0 1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem' }}>Total Analyses: <strong>{history.length}</strong></p>
         </div>
       )}
     </div>

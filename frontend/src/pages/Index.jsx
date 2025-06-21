@@ -142,28 +142,45 @@ const Index = () => {
       <MotionBackground />
 
       {isSidebarOpen && (
-        <div
-          style={{
-            width: '300px',
-            backgroundColor: 'rgba(168,85,247,0.3)',
-            boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
-            zIndex: 1000,
-            overflowY: 'auto',
-            flexShrink: 0,
-          }}
-        >
-          <HistorySidebar
-            history={analysisHistory}
-            onSelectHistory={handleSelectHistory}
-            currentAnalysisId={currentAnalysisId}
-            onClearHistory={handleClearHistory}
-            onDeleteAnalysis={handleDeleteAnalysis}
+        <>
+          {/* Mobile overlay */}
+          <div 
+            style={{
+              position: 'fixed',
+              inset: 0,
+              backgroundColor: 'rgba(0,0,0,0.5)',
+              zIndex: 999,
+              display: window.innerWidth < 768 ? 'block' : 'none'
+            }}
+            onClick={() => setIsSidebarOpen(false)}
           />
-        </div>
+          <div
+            style={{
+              width: window.innerWidth < 768 ? '280px' : '300px',
+              backgroundColor: 'rgba(168,85,247,0.3)',
+              boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
+              zIndex: 1000,
+              overflowY: 'auto',
+              flexShrink: 0,
+              position: window.innerWidth < 768 ? 'fixed' : 'relative',
+              height: window.innerWidth < 768 ? '100vh' : 'auto',
+              left: window.innerWidth < 768 ? 0 : 'auto',
+              top: window.innerWidth < 768 ? 0 : 'auto'
+            }}
+          >
+            <HistorySidebar
+              history={analysisHistory}
+              onSelectHistory={handleSelectHistory}
+              currentAnalysisId={currentAnalysisId}
+              onClearHistory={handleClearHistory}
+              onDeleteAnalysis={handleDeleteAnalysis}
+            />
+          </div>
+        </>
       )}
 
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 10, overflow: 'hidden' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '16px', borderBottom: '1px solid rgba(168,85,247,0.3)', backgroundColor: 'rgba(15,23,42,0.9)', backdropFilter: 'blur(12px)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: window.innerWidth < 768 ? '12px' : '16px', borderBottom: '1px solid rgba(168,85,247,0.3)', backgroundColor: 'rgba(15,23,42,0.9)', backdropFilter: 'blur(12px)' }}>
           <button
             onClick={() => setIsSidebarOpen(prev => !prev)}
             style={{
@@ -171,10 +188,10 @@ const Index = () => {
               border: 'none',
               cursor: 'pointer',
               color: '#c084fc',
-              padding: '8px'
+              padding: window.innerWidth < 768 ? '6px' : '8px'
             }}
           >
-            <Menu size={28} />
+            <Menu size={window.innerWidth < 768 ? 24 : 28} />
           </button>
           <Header />
         </div>
@@ -183,7 +200,12 @@ const Index = () => {
           .analysis-container {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 1.5rem;
+          }
+          @media (min-width: 768px) {
+            .analysis-container {
+              gap: 2rem;
+            }
           }
           @media (min-width: 1024px) {
             .analysis-container {
@@ -193,65 +215,74 @@ const Index = () => {
               align-items: start;
             }
           }
+          @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+          }
+          @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+          }
         `}</style>
 
-        <main style={{ flex: 1, position: 'relative', zIndex: 10, padding: '24px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '4rem', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%) translateY(-1rem)', width: '8rem', height: '8rem', background: 'linear-gradient(to right, rgba(147,51,234,0.3), rgba(107,33,168,0.2))', borderRadius: '9999px', filter: 'blur(48px)', opacity: 0.3, animation: 'pulse 2s infinite' }}></div>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '24px', marginBottom: '2rem', position: 'relative' }}>
-              <Shield size={48} color="#c084fc" />
-              <h1 style={{ fontSize: '3rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: '1.2' }}>ATS Resume Scanner</h1>
-              <Award size={48} color="#a78bfa" />
+        <main style={{ flex: 1, position: 'relative', zIndex: 10, padding: window.innerWidth < 768 ? '16px' : '24px' }}>
+          <div style={{ textAlign: 'center', marginBottom: window.innerWidth < 768 ? '2rem' : '4rem', position: 'relative' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '4px' : '24px', marginBottom: window.innerWidth < 768 ? '0.5rem' : '2rem', position: 'relative', flexWrap: 'wrap' }}>
+              <Shield size={window.innerWidth < 768 ? 14 : 48} color="#c084fc" />
+              <h1 style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : window.innerWidth < 1024 ? '1.5rem' : '2rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: '1', textAlign: 'center' }}>ATS Resume Scanner</h1>
+              <Award size={window.innerWidth < 768 ? 14 : 48} color="#a78bfa" />
             </div>
-            <div style={{ border: '2px solid transparent', borderImage: 'linear-gradient(to right, #a855f7, #8b5cf6) 1', marginBottom: '2rem', maxWidth: '32rem', margin: 'auto' }}>
-              <div style={{ padding: '1rem 2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px' }}>
-                  <CheckCircle size={24} color="#4ade80" />
-                  <span style={{ color: '#e9d5ff', fontWeight: '600', fontSize: '1.25rem' }}>Trusted by Professionals</span>
-                  <Shield size={24} color="#4ade80" />
+            <div style={{ border: '2px solid transparent', borderImage: 'linear-gradient(to right, #a855f7, #8b5cf6) 1', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', maxWidth: window.innerWidth < 768 ? '20rem' : '32rem', margin: 'auto' }}>
+              <div style={{ padding: window.innerWidth < 768 ? '0.5rem 1rem' : '1rem 2rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '6px' : '12px', flexWrap: 'wrap' }}>
+                  <CheckCircle size={window.innerWidth < 768 ? 16 : 24} color="#4ade80" />
+                  <span style={{ color: '#e9d5ff', fontWeight: '600', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.25rem' }}>Trusted by Professionals</span>
+                  <Shield size={window.innerWidth < 768 ? 16 : 24} color="#4ade80" />
                 </div>
               </div>
             </div>
-            <p style={{ fontSize: '1.25rem', color: '#e9d5ff', maxWidth: '64rem', margin: 'auto', lineHeight: '1.75', marginBottom: '3rem', fontWeight: 500 }}>
+            <p style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : '1rem', color: '#e9d5ff', maxWidth: window.innerWidth < 768 ? '100%' : '64rem', margin: 'auto', lineHeight: '1.75', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', fontWeight: 500, padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
               Professional-grade resume analysis powered by advanced AI technology. Get comprehensive insights to optimize your resume.
             </p>
-            <div style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', marginBottom: '3rem' }}>
-              <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <TrendingUp size={40} color="#4ade80" style={{ margin: 'auto', marginBottom: '1rem' }} />
-                <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.5rem' }}>98%</div>
-                <p style={{ fontSize: '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Accuracy Rate</p>
+            <div style={{ display: 'grid', gap: window.innerWidth < 768 ? '1rem' : '2rem', gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(180px, 1fr))', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
+              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
+                <TrendingUp size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
+                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>98%</div>
+                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Accuracy Rate</p>
               </div>
-              <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <Zap size={40} color="#4ade80" style={{ margin: 'auto', marginBottom: '1rem' }} />
-                <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.5rem' }}>Instant</div>
-                <p style={{ fontSize: '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Analysis</p>
+              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
+                <Zap size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
+                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>Instant</div>
+                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Analysis</p>
               </div>
-              <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <Shield size={40} color="#4ade80" style={{ margin: 'auto', marginBottom: '1rem' }} />
-                <div style={{ fontSize: '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.5rem' }}>Secure</div>
-                <p style={{ fontSize: '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>& Private</p>
+              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
+                <Shield size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
+                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>Secure</div>
+                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>& Private</p>
               </div>
             </div>
           </div>
 
-          <div style={{ marginBottom: '3rem' }}>
-            <div style={{ border: '2px solid transparent', borderImage: 'linear-gradient(to right, #a855f7, #8b5cf6) 1', maxWidth: '32rem', margin: 'auto' }}>
+          <div style={{ marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
+            <div style={{ border: '2px solid transparent', borderImage: 'linear-gradient(to right, #a855f7, #8b5cf6) 1', maxWidth: window.innerWidth < 768 ? '100%' : '32rem', margin: 'auto' }}>
               <div style={{ padding: '0.5rem' }}>
-                <div style={{ display: 'flex', borderRadius: '0.5rem', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', borderRadius: '0.5rem', overflow: 'hidden', flexDirection: window.innerWidth < 480 ? 'column' : 'row' }}>
                   <button 
-                    style={{ flex: 1, padding: '1.5rem 2rem', fontWeight: 600, fontSize: '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', backgroundColor: activeTab === 'upload' ? '#9333ea' : 'transparent', color: activeTab === 'upload' ? 'white' : '#d8b4fe', cursor: 'pointer' }}
+                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'upload' ? '#9333ea' : 'transparent', color: activeTab === 'upload' ? 'white' : '#d8b4fe', cursor: 'pointer', border: 'none' }}
                     onClick={() => setActiveTab('upload')}
                   >
-                    <FileText size={24} />
-                    Upload Resume
+                    <FileText size={window.innerWidth < 768 ? 18 : 24} />
+                    <span style={{ display: window.innerWidth < 480 ? 'none' : 'inline' }}>Upload Resume</span>
+                    <span style={{ display: window.innerWidth < 480 ? 'inline' : 'none' }}>Upload</span>
                   </button>
                   <button 
-                    style={{ flex: 1, padding: '1.5rem 2rem', fontWeight: 600, fontSize: '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', backgroundColor: activeTab === 'analysis' ? '#9333ea' : 'transparent', color: (!resumeText && !analysisResult) ? '#a78bfa' : activeTab === 'analysis' ? 'white' : '#d8b4fe', cursor: (!resumeText && !analysisResult) ? 'not-allowed' : 'pointer' }}
+                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'analysis' ? '#9333ea' : 'transparent', color: (!resumeText && !analysisResult) ? '#a78bfa' : activeTab === 'analysis' ? 'white' : '#d8b4fe', cursor: (!resumeText && !analysisResult) ? 'not-allowed' : 'pointer', border: 'none' }}
                     onClick={() => (resumeText || analysisResult) && setActiveTab('analysis')}
                     disabled={!resumeText && !analysisResult}
                   >
-                    <BarChart2 size={24} />
-                    Analysis Results
+                    <BarChart2 size={window.innerWidth < 768 ? 18 : 24} />
+                    <span style={{ display: window.innerWidth < 480 ? 'none' : 'inline' }}>Analysis Results</span>
+                    <span style={{ display: window.innerWidth < 480 ? 'inline' : 'none' }}>Results</span>
                   </button>
                 </div>
               </div>
@@ -260,20 +291,20 @@ const Index = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {activeTab === 'upload' && (
-              <div style={{ padding: '3rem', maxWidth: '64rem', margin: 'auto', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.1)' }}>
-                <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-                  <Upload size={32} color="rgb(200, 150, 255)" />
-                  <span style={{ background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Upload Your Professional Resume</span>
-                  <CheckCircle size={32} color="#4ade80" />
+              <div style={{ padding: window.innerWidth < 768 ? '1.5rem' : '3rem', maxWidth: '64rem', margin: 'auto', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.1)' }}>
+                <h2 style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '1rem', flexWrap: 'wrap' }}>
+                  <Upload size={window.innerWidth < 768 ? 20 : 32} color="rgb(200, 150, 255)" />
+                  <span style={{ background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textAlign: 'center' }}>Upload Your Professional Resume</span>
+                  <CheckCircle size={window.innerWidth < 768 ? 20 : 32} color="#4ade80" />
                 </h2>
                 <ResumeUploader onUpload={handleResumeUpload} isAnalyzing={isAnalyzing} />
                 {isAnalyzing && (
-                  <div style={{ marginTop: '3rem', textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2rem', borderRadius: '1rem' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                      <div style={{ width: '3rem', height: '3rem', border: '4px solid #c4b5fd', borderTop: '4px solid #9333ea', borderRadius: '9999px', animation: 'spin 1s linear infinite' }}></div>
-                      <p style={{ fontSize: '1.5rem', fontWeight: 600, color: '#e9d5ff' }}>Analyzing your resume...</p>
+                  <div style={{ marginTop: window.innerWidth < 768 ? '1.5rem' : '3rem', textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.05)', padding: window.innerWidth < 768 ? '1rem' : '2rem', borderRadius: '1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '1rem', marginBottom: window.innerWidth < 768 ? '1rem' : '1.5rem', flexDirection: window.innerWidth < 480 ? 'column' : 'row' }}>
+                      <div style={{ width: window.innerWidth < 768 ? '2rem' : '3rem', height: window.innerWidth < 768 ? '2rem' : '3rem', border: '4px solid #c4b5fd', borderTop: '4px solid #9333ea', borderRadius: '9999px', animation: 'spin 1s linear infinite' }}></div>
+                      <p style={{ fontSize: window.innerWidth < 768 ? '1rem' : '1.5rem', fontWeight: 600, color: '#e9d5ff' }}>Analyzing your resume...</p>
                     </div>
-                    <p style={{ color: '#ddd6fe', fontSize: '1.125rem' }}>Our AI is providing comprehensive analysis and recommendations.</p>
+                    <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem' }}>Our AI is providing comprehensive analysis and recommendations.</p>
                   </div>
                 )}
               </div>
@@ -281,11 +312,11 @@ const Index = () => {
 
             {activeTab === 'analysis' && analysisResult && analysisResult.score && (
               <div className="analysis-container">
-                <div style={{ textAlign: 'center', marginBottom: '3rem', gridColumn: '1 / -1' }}>
-                  <h2 style={{ fontSize: '2.25rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '1rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem', gridColumn: '1 / -1' }}>
+                  <h2 style={{ fontSize: window.innerWidth < 768 ? '1.5rem' : '2.25rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '1rem' }}>
                     Professional Analysis Complete
                   </h2>
-                  <p style={{ color: '#ddd6fe', fontSize: '1.25rem' }}>File: {uploadedFileName}</p>
+                  <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.25rem', wordBreak: 'break-word', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>File: {uploadedFileName}</p>
                 </div>
                 <ResumeScoreCard 
                   overallScore={analysisResult.score.overallScore} 

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload, FileText, Shield, CheckCircle } from 'lucide-react';
 import { parseFile } from '../utils/fileParser';
@@ -10,6 +10,13 @@ import { getResumeSuggestions } from '../services/apiService';
 const ResumeUploader = ({ onUpload, isAnalyzing }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onDrop = useCallback(async (acceptedFiles) => {
     const file = acceptedFiles[0];
@@ -65,47 +72,47 @@ const ResumeUploader = ({ onUpload, isAnalyzing }) => {
         style={{
           border: '2px dashed',
           borderRadius: '1rem',
-          padding: '3rem',
+          padding: windowWidth < 768 ? '1.5rem' : '3rem',
           textAlign: 'center',
           cursor: 'pointer',
           transition: 'all 0.3s ease',
           backgroundColor: isDragActive ? 'rgba(59, 130, 246, 0.05)' : 'transparent',
           borderColor: isDragActive ? '#3B82F6' : '#E5E7EB',
-          transform: isDragActive ? 'scale(1.05)' : 'scale(1)',
+          transform: isDragActive ? 'scale(1.02)' : 'scale(1)',
           opacity: isAnalyzing ? 0.7 : 1,
           pointerEvents: isAnalyzing ? 'none' : 'auto',
         }}
       >
         <input {...getInputProps()} />
 
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: windowWidth < 768 ? '1rem' : '1.5rem' }}>
           <div>
-            <div style={{ padding: '1.5rem', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderRadius: '0.75rem' }}>
+            <div style={{ padding: windowWidth < 768 ? '1rem' : '1.5rem', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderRadius: '0.75rem' }}>
               <Upload 
-                style={{ height: '3rem', width: '3rem', color: '#3B82F6', transform: isDragActive ? 'scale(1.1)' : 'scale(1)', transition: 'all 0.5s ease' }}
+                style={{ height: windowWidth < 768 ? '2rem' : '3rem', width: windowWidth < 768 ? '2rem' : '3rem', color: '#3B82F6', transform: isDragActive ? 'scale(1.1)' : 'scale(1)', transition: 'all 0.5s ease' }}
               />
             </div>
           </div>
 
           <div style={{ textAlign: 'center' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.75rem', color: '#e9d5ff' }}>
+            <h3 style={{ fontSize: windowWidth < 768 ? '1rem' : '1.25rem', fontWeight: 'bold', marginBottom: windowWidth < 768 ? '0.5rem' : '0.75rem', color: '#e9d5ff' }}>
               {isDragActive ? 'Drop your resume here' : 'Upload Professional Resume'}
             </h3>
-            <p style={{ color: '#e9d5ff', marginBottom: '1.5rem' }}>
+            <p style={{ color: '#e9d5ff', marginBottom: windowWidth < 768 ? '1rem' : '1.5rem', fontSize: windowWidth < 768 ? '0.875rem' : '1rem' }}>
               Drag and drop your resume file, or click to browse
             </p>
 
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', fontSize: '0.875rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
-                <FileText style={{ height: '1rem', width: '1rem', color: '#EF4444' }} />
+            <div style={{ display: 'flex', justifyContent: 'center', gap: windowWidth < 768 ? '0.75rem' : '1.5rem', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: windowWidth < 768 ? '0.375rem 0.75rem' : '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
+                <FileText style={{ height: windowWidth < 768 ? '0.75rem' : '1rem', width: windowWidth < 768 ? '0.75rem' : '1rem', color: '#EF4444' }} />
                 <span style={{ color: '#111827' }}>PDF</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
-                <FileText style={{ height: '1rem', width: '1rem', color: '#3B82F6' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: windowWidth < 768 ? '0.375rem 0.75rem' : '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
+                <FileText style={{ height: windowWidth < 768 ? '0.75rem' : '1rem', width: windowWidth < 768 ? '0.75rem' : '1rem', color: '#3B82F6' }} />
                 <span style={{ color: '#111827' }}>DOCX</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
-                <FileText style={{ height: '1rem', width: '1rem', color: '#10B981' }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', padding: windowWidth < 768 ? '0.375rem 0.75rem' : '0.5rem 1rem', background: 'rgba(255, 255, 255, 0.6)', borderRadius: '0.5rem', boxShadow: '0 0 1rem rgba(169, 85, 247, 0.5)' }}>
+                <FileText style={{ height: windowWidth < 768 ? '0.75rem' : '1rem', width: windowWidth < 768 ? '0.75rem' : '1rem', color: '#10B981' }} />
                 <span style={{ color: '#111827' }}>TXT</span>
               </div>
             </div>
@@ -121,38 +128,38 @@ const ResumeUploader = ({ onUpload, isAnalyzing }) => {
 
       {isAnalyzing && (
         <div style={{ 
-          marginTop: '2rem',
-          padding: '1.5rem',
+          marginTop: windowWidth < 768 ? '1rem' : '2rem',
+          padding: windowWidth < 768 ? '1rem' : '1.5rem',
           backgroundColor: 'rgba(59, 130, 246, 0.1)',
           borderRadius: '0.75rem',
           textAlign: 'center'
         }}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: windowWidth < 768 ? '0.75rem' : '1rem' }}>
             <div style={{ 
-              width: '3rem', 
-              height: '3rem', 
+              width: windowWidth < 768 ? '2rem' : '3rem', 
+              height: windowWidth < 768 ? '2rem' : '3rem', 
               border: '4px solid rgba(59, 130, 246, 0.2)',
               borderTopColor: '#3B82F6',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite'
             }}></div>
-            <p style={{ color: '#e9d5ff', fontWeight: 500 }}>Analyzing your resume...</p>
-            <p style={{ color: '#a78bfa', fontSize: '0.875rem' }}>
+            <p style={{ color: '#e9d5ff', fontWeight: 500, fontSize: windowWidth < 768 ? '0.875rem' : '1rem' }}>Analyzing your resume...</p>
+            <p style={{ color: '#a78bfa', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem' }}>
               Parsing content, extracting skills, and evaluating ATS compatibility
             </p>
           </div>
         </div>
       )}
 
-      <div style={{ marginTop: '1.5rem', padding: '1.5rem', background: 'rgba(100, 50, 150, 0.4)', borderRadius: '0.75rem' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
-          <Shield style={{ height: '1.5rem', width: '1.5rem', color: '#3B82F6', marginTop: '0.25rem' }} />
+      <div style={{ marginTop: windowWidth < 768 ? '1rem' : '1.5rem', padding: windowWidth < 768 ? '1rem' : '1.5rem', background: 'rgba(100, 50, 150, 0.4)', borderRadius: '0.75rem' }}>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: windowWidth < 768 ? '0.5rem' : '0.75rem' }}>
+          <Shield style={{ height: windowWidth < 768 ? '1.25rem' : '1.5rem', width: windowWidth < 768 ? '1.25rem' : '1.5rem', color: '#3B82F6', marginTop: '0.25rem', flexShrink: 0 }} />
           <div>
-            <h4 style={{ fontWeight: '600', color: '#e9d5ff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h4 style={{ fontWeight: '600', color: '#e9d5ff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: windowWidth < 768 ? '0.875rem' : '1rem' }}>
               Enterprise-Grade Security
-              <CheckCircle style={{ height: '1rem', width: '1rem', color: '#10B981' }} />
+              <CheckCircle style={{ height: windowWidth < 768 ? '0.75rem' : '1rem', width: windowWidth < 768 ? '0.75rem' : '1rem', color: '#10B981' }} />
             </h4>
-            <p style={{ color: '#e9d5ff', fontSize: '0.875rem', lineHeight: '1.5' }}>
+            <p style={{ color: '#e9d5ff', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', lineHeight: '1.5' }}>
               Your resume is processed with bank-level encryption and never stored on our servers. 
               All analysis happens in real-time with complete privacy protection.
             </p>
