@@ -7,33 +7,42 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export const getResumeSuggestions = async (resumeText) => {
   try {
-
-    
     const prompt = `
-    Analyze this resume and provide 5-7 specific improvement suggestions to maximize its ATS score and increase selection chances for the toughest company screenings (e.g., FAANG). Focus on:
-    - Optimizing action verbs for impact (e.g., "developed" vs. "worked on")
-    - Adding quantifiable metrics (e.g., "increased sales by 20%" vs. "improved sales")
-    - Enhancing industry-specific keywords (e.g., AWS, Python, Agile) for top-tier roles
-    - Improving section organization and hierarchy (e.g., clear headers, consistent formatting)
-    - Enhancing professional presentation (e.g., concise phrasing, no typos)
-    - Ensuring alignment with MAANGM or MAANG+ level ATS criteria (technical depth, measurable results)
+    CRITICAL ANALYSIS: This resume must pass the most ruthless ATS filters used by Meta, Google, Amazon, Apple, Netflix, Microsoft, and other Tier-1 tech giants. These companies reject 99% of applications. Provide 6-8 brutal but actionable improvements focusing on:
 
-    For each suggestion, provide:
-    - category (dynamic, e.g., Skills Enhancement, Experience Optimization, Metrics Focus, etc.)
-    - title (short description)
-    - detailed description
-    - "before" example with line numbers (e.g., L1: Original text)
-    - "after" example with line numbers (e.g., L1: Improved text)
-    - rationale (why this improves ATS score and selection odds)
+    TECHNICAL EXCELLENCE GAPS:
+    - Missing cutting-edge technologies: Kubernetes, Terraform, GraphQL, TypeScript, Rust, Go, distributed systems architecture
+    - Weak system design indicators: No mention of scalability (millions of users), high-availability (99.99% uptime), performance optimization (sub-100ms latency)
+    - Insufficient cloud-native expertise: Multi-cloud strategies, serverless architectures, containerization at enterprise scale
+    - Lack of AI/ML integration: Machine learning pipelines, data engineering, real-time analytics, recommendation systems
 
-    IMPORTANT: Return ONLY a valid JSON array. Do not include any explanatory text, markdown formatting, or code blocks. Start your response with [ and end with ]. Format:
+    IMPACT MEASUREMENT FAILURES:
+    - Vague accomplishments without concrete business metrics: revenue impact, user growth, performance improvements, cost savings
+    - Missing scale indicators: data volume processed, concurrent users handled, system throughput, infrastructure managed
+    - No leadership quantification: team size led, cross-functional collaboration scope, mentorship impact
+
+    ELITE-LEVEL REQUIREMENTS:
+    - Advanced algorithmic thinking: Complex problem-solving, optimization challenges, computational efficiency
+    - Open-source contributions and technical thought leadership
+    - Industry recognition: Patents, publications, conference speaking, technical blog authorship
+    - Continuous learning: Latest certifications, advanced degrees, cutting-edge technology adoption
+
+    For each critical improvement:
+    - category: Choose from Technical Depth, Scale & Performance, Leadership Impact, Innovation & Research, Business Value, System Architecture
+    - title: Specific weakness identified
+    - description: Detailed explanation of why this is a deal-breaker for elite companies
+    - before: Exact weak text from the resume
+    - after: Elite-level replacement that demonstrates exceptional capability
+    - rationale: How this transforms the candidate from average to exceptional in ATS ranking
+
+    Return ONLY valid JSON array. No explanations, no markdown:
     [{
-      "category": "Skills Enhancement",
-      "title": "Add Technical Skills",
-      "description": "The resume lacks key technical skills...",
-      "before": "L1: Worked on projects",
-      "after": "L1: Developed projects using Python and AWS",
-      "rationale": "Adding specific skills like Python and AWS boosts keyword matching for FAANG ATS systems."
+      "category": "Technical Depth",
+      "title": "Demonstrate Advanced System Architecture",
+      "description": "Current description shows basic development work instead of complex system design that FAANG expects from senior engineers",
+      "before": "Built web applications using React",
+      "after": "Architected microservices platform serving 50M+ users with 99.99% uptime, implementing event-driven architecture with Kafka, Redis caching, and auto-scaling Kubernetes clusters",
+      "rationale": "Elite companies filter for candidates who can design and scale complex distributed systems, not just build basic applications"
     }]
 
     Resume:
