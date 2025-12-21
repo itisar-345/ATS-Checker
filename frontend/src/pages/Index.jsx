@@ -229,38 +229,12 @@ const Index = () => {
           <div style={{ textAlign: 'center', marginBottom: window.innerWidth < 768 ? '2rem' : '4rem', position: 'relative' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '4px' : '24px', marginBottom: window.innerWidth < 768 ? '0.5rem' : '2rem', position: 'relative', flexWrap: 'wrap' }}>
               <Shield size={window.innerWidth < 768 ? 14 : 48} color="#c084fc" />
-              <h1 style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : window.innerWidth < 1024 ? '1.5rem' : '2rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: '1', textAlign: 'center' }}>ATS Resume Scanner</h1>
+              <h1 style={{ fontSize: window.innerWidth < 768 ? '1rem' : window.innerWidth < 1024 ? '1.5rem' : '2rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: '1', textAlign: 'center' }}>ATS Resume Scanner</h1>
               <Award size={window.innerWidth < 768 ? 14 : 48} color="#a78bfa" />
             </div>
-            <div style={{ border: '2px solid transparent', borderImage: 'linear-gradient(to right, #a855f7, #8b5cf6) 1', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', maxWidth: window.innerWidth < 768 ? '20rem' : '32rem', margin: 'auto' }}>
-              <div style={{ padding: window.innerWidth < 768 ? '0.5rem 1rem' : '1rem 2rem' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '6px' : '12px', flexWrap: 'wrap' }}>
-                  <CheckCircle size={window.innerWidth < 768 ? 16 : 24} color="#4ade80" />
-                  <span style={{ color: '#e9d5ff', fontWeight: '600', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.25rem' }}>Trusted by Professionals</span>
-                  <Shield size={window.innerWidth < 768 ? 16 : 24} color="#4ade80" />
-                </div>
-              </div>
-            </div>
-            <p style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : '1rem', color: '#e9d5ff', maxWidth: window.innerWidth < 768 ? '100%' : '64rem', margin: 'auto', lineHeight: '1.75', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', fontWeight: 500, padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
+            <p style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : window.innerWidth < 1024 ? '1rem' : '1.5rem', color: '#c4b5fd', maxWidth: window.innerWidth < 768 ? '100%' : '48rem', margin: 'auto', lineHeight: '1.6', marginBottom: window.innerWidth < 768 ? '1.5rem' : '2.5rem', fontWeight: 400, padding: window.innerWidth < 768 ? '0 1rem' : '0', opacity: 0.9 }}>
               Professional-grade resume analysis powered by advanced AI technology. Get comprehensive insights to optimize your resume.
             </p>
-            <div style={{ display: 'grid', gap: window.innerWidth < 768 ? '1rem' : '2rem', gridTemplateColumns: window.innerWidth < 768 ? '1fr' : 'repeat(auto-fit, minmax(180px, 1fr))', marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
-              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <TrendingUp size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>98%</div>
-                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Accuracy Rate</p>
-              </div>
-              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <Zap size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>Instant</div>
-                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>Analysis</p>
-              </div>
-              <div style={{ textAlign: 'center', padding: window.innerWidth < 768 ? '0.75rem' : '1rem', background: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.2)' }}>
-                <Shield size={window.innerWidth < 768 ? 24 : 40} color="#4ade80" style={{ margin: 'auto', marginBottom: '0.5rem' }} />
-                <div style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', color: '#e9d5ff', marginBottom: '0.25rem' }}>Secure</div>
-                <p style={{ fontSize: window.innerWidth < 768 ? '0.75rem' : '0.875rem', color: '#ddd6fe', fontWeight: 500 }}>& Private</p>
-              </div>
-            </div>
           </div>
 
           <div style={{ marginBottom: window.innerWidth < 768 ? '1rem' : '2rem', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>
@@ -268,7 +242,7 @@ const Index = () => {
               <div style={{ padding: '0.5rem' }}>
                 <div style={{ display: 'flex', borderRadius: '0.5rem', overflow: 'hidden', flexDirection: window.innerWidth < 480 ? 'column' : 'row' }}>
                   <button 
-                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'upload' ? '#9333ea' : 'transparent', color: activeTab === 'upload' ? 'white' : '#d8b4fe', cursor: 'pointer', border: 'none' }}
+                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.8rem' : '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'upload' ? '#9333ea' : 'transparent', color: activeTab === 'upload' ? 'white' : '#d8b4fe', cursor: 'pointer', border: 'none' }}
                     onClick={() => setActiveTab('upload')}
                   >
                     <FileText size={window.innerWidth < 768 ? 18 : 24} />
@@ -276,7 +250,7 @@ const Index = () => {
                     <span style={{ display: window.innerWidth < 480 ? 'inline' : 'none' }}>Upload</span>
                   </button>
                   <button 
-                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'analysis' ? '#9333ea' : 'transparent', color: (!resumeText && !analysisResult) ? '#a78bfa' : activeTab === 'analysis' ? 'white' : '#d8b4fe', cursor: (!resumeText && !analysisResult) ? 'not-allowed' : 'pointer', border: 'none' }}
+                    style={{ flex: 1, padding: window.innerWidth < 768 ? '1rem' : '1.5rem 2rem', fontWeight: 600, fontSize: window.innerWidth < 768 ? '0.8rem' : '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '0.75rem', backgroundColor: activeTab === 'analysis' ? '#9333ea' : 'transparent', color: (!resumeText && !analysisResult) ? '#a78bfa' : activeTab === 'analysis' ? 'white' : '#d8b4fe', cursor: (!resumeText && !analysisResult) ? 'not-allowed' : 'pointer', border: 'none' }}
                     onClick={() => (resumeText || analysisResult) && setActiveTab('analysis')}
                     disabled={!resumeText && !analysisResult}
                   >
@@ -292,11 +266,6 @@ const Index = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             {activeTab === 'upload' && (
               <div style={{ padding: window.innerWidth < 768 ? '1.5rem' : '3rem', maxWidth: '64rem', margin: 'auto', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '1rem', boxShadow: '0 0 1rem rgba(168,85,247,0.1)' }}>
-                <h2 style={{ fontSize: window.innerWidth < 768 ? '1.25rem' : '1.875rem', fontWeight: 'bold', textAlign: 'center', marginBottom: window.innerWidth < 768 ? '1.5rem' : '3rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: window.innerWidth < 768 ? '0.5rem' : '1rem', flexWrap: 'wrap' }}>
-                  <Upload size={window.innerWidth < 768 ? 20 : 32} color="rgb(200, 150, 255)" />
-                  <span style={{ background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', textAlign: 'center' }}>Upload Your Professional Resume</span>
-                  <CheckCircle size={window.innerWidth < 768 ? 20 : 32} color="#4ade80" />
-                </h2>
                 <ResumeUploader onUpload={handleResumeUpload} isAnalyzing={isAnalyzing} />
                 {isAnalyzing && (
                   <div style={{ marginTop: window.innerWidth < 768 ? '1.5rem' : '3rem', textAlign: 'center', backgroundColor: 'rgba(255,255,255,0.05)', padding: window.innerWidth < 768 ? '1rem' : '2rem', borderRadius: '1rem' }}>
@@ -304,7 +273,7 @@ const Index = () => {
                       <div style={{ width: window.innerWidth < 768 ? '2rem' : '3rem', height: window.innerWidth < 768 ? '2rem' : '3rem', border: '4px solid #c4b5fd', borderTop: '4px solid #9333ea', borderRadius: '9999px', animation: 'spin 1s linear infinite' }}></div>
                       <p style={{ fontSize: window.innerWidth < 768 ? '1rem' : '1.5rem', fontWeight: 600, color: '#e9d5ff' }}>Analyzing your resume...</p>
                     </div>
-                    <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.125rem' }}>Our AI is providing comprehensive analysis and recommendations.</p>
+                    <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.8rem' : '1rem' }}>Our AI is providing comprehensive analysis and recommendations.</p>
                   </div>
                 )}
               </div>
@@ -316,7 +285,7 @@ const Index = () => {
                   <h2 style={{ fontSize: window.innerWidth < 768 ? '1.5rem' : '2.25rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '1rem' }}>
                     Professional Analysis Complete
                   </h2>
-                  <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.875rem' : '1.25rem', wordBreak: 'break-word', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>File: {uploadedFileName}</p>
+                  <p style={{ color: '#ddd6fe', fontSize: window.innerWidth < 768 ? '0.8rem' : '1.25rem', wordBreak: 'break-word', padding: window.innerWidth < 768 ? '0 1rem' : '0' }}>File: {uploadedFileName}</p>
                 </div>
                 <ResumeScoreCard 
                   overallScore={analysisResult.score.overallScore} 
