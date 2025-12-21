@@ -232,7 +232,7 @@ const Index = () => {
               <h1 style={{ fontSize: window.innerWidth < 768 ? '1rem' : window.innerWidth < 1024 ? '1.5rem' : '2rem', fontWeight: 'bold', background: 'linear-gradient(to right, #a855f7, #8b5cf6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', lineHeight: '1', textAlign: 'center' }}>ATS Resume Scanner</h1>
               <Award size={window.innerWidth < 768 ? 14 : 48} color="#a78bfa" />
             </div>
-            <p style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : window.innerWidth < 1024 ? '1rem' : '1.5rem', color: '#c4b5fd', maxWidth: window.innerWidth < 768 ? '100%' : '48rem', margin: 'auto', lineHeight: '1.6', marginBottom: window.innerWidth < 768 ? '1.5rem' : '2.5rem', fontWeight: 400, padding: window.innerWidth < 768 ? '0 1rem' : '0', opacity: 0.9 }}>
+            <p style={{ fontSize: window.innerWidth < 768 ? '0.8rem' : window.innerWidth < 1024 ? '1rem' : '1.25rem', color: '#c4b5fd', maxWidth: window.innerWidth < 768 ? '100%' : '48rem', margin: 'auto', lineHeight: '1.6', marginBottom: window.innerWidth < 768 ? '1.5rem' : '2.5rem', fontWeight: 400, padding: window.innerWidth < 768 ? '0 1rem' : '0', opacity: 0.9 }}>
               Professional-grade resume analysis powered by advanced AI technology. Get comprehensive insights to optimize your resume.
             </p>
           </div>

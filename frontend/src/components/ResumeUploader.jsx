@@ -156,12 +156,11 @@ const ResumeUploader = ({ onUpload, isAnalyzing }) => {
           <Shield style={{ height: windowWidth < 768 ? '1.25rem' : '1.5rem', width: windowWidth < 768 ? '1.25rem' : '1.5rem', color: '#3B82F6', marginTop: '0.25rem', flexShrink: 0 }} />
           <div>
             <h4 style={{ fontWeight: '600', color: '#e9d5ff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: windowWidth < 768 ? '0.875rem' : '1rem' }}>
-              Enterprise-Grade Security
-              <CheckCircle style={{ height: windowWidth < 768 ? '0.75rem' : '1rem', width: windowWidth < 768 ? '0.75rem' : '1rem', color: '#10B981' }} />
+              Privacy & Protection
             </h4>
             <p style={{ color: '#e9d5ff', fontSize: windowWidth < 768 ? '0.75rem' : '0.875rem', lineHeight: '1.5' }}>
-              Your resume is processed with bank-level encryption and never stored on our servers. 
-              All analysis happens in real-time with complete privacy protection.
+              Your resume is processed in real-time, never stored anywhere, stays only on your browser, and is read only on your own device.  
+              Your Files, Your Device, Your Control.
             </p>
           </div>
         </div>
