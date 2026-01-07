@@ -224,7 +224,16 @@ The server will start and listen on the port specified in `.env` or default to 4
 
 - **POST /api/parse-file**
 
-  Currently not implemented.
+  Parse uploaded resume files (DOCX, TXT).
+
+  - Request: Multipart form data with 'file' field
+  - Response:
+
+    ```json
+    {
+      "text": "Extracted resume text content"
+    }
+    ```
 
 ---
 

@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import multer from 'multer';
+import mammoth from 'mammoth';
+import fs from 'fs';
 
 import { analyzeResume } from './services/atsService.js';
 import { getResumeSuggestions } from './services/apiService.js';
@@ -12,6 +15,8 @@ const port = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
+
+const upload = multer({ dest: 'uploads/' });
 
 // Endpoint to analyze resume text
 app.post('/api/analyze-resume', async (req, res) => {
@@ -43,17 +48,26 @@ app.post('/api/resume-suggestions', async (req, res) => {
   }
 });
 
-// Endpoint to parse uploaded file (assuming file is sent as base64 or similar)
-app.post('/api/parse-file', async (req, res) => {
+app.post('/api/parse-file', upload.single('file'), async (req, res) => {
   try {
-    // For simplicity, this example expects file info in request body
-    const { file } = req.body;
-    if (!file) {
+    if (!req.file) {
       return res.status(400).json({ error: 'file is required' });
     }
-    // parseFile expects a File object, so this may need adjustment for backend usage
-    // Here, just returning an error placeholder
-    res.status(501).json({ error: 'File parsing API not implemented for backend yet' });
+
+    let text = '';
+    const ext = req.file.originalname.split('.').pop().toLowerCase();
+
+    if (ext === 'docx') {
+      const result = await mammoth.extractRawText({ path: req.file.path });
+      text = result.value;
+    } else if (ext === 'txt') {
+      text = fs.readFileSync(req.file.path, 'utf8');
+    } else {
+      return res.status(400).json({ error: 'Unsupported file type' });
+    }
+
+    fs.unlinkSync(req.file.path);
+    res.json({ text });
   } catch (error) {
     console.error('Error in /api/parse-file:', error);
     res.status(500).json({ error: 'Internal server error' });
